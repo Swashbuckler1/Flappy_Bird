@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 set(CMAKE_CXX_STANDARD 11)
 project(final-project)
 
+
 # This tells the compiler to not aggressively optimize and
 # to include debugging information so that the debugger
 # can properly read what's going on.
@@ -52,6 +53,7 @@ include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 
 list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
         src/bird.cpp
+        src/barrel.cpp
         src/flappybird_app.cpp)
 
 list(APPEND TEST_FILES tests/game_logic_tests.cpp)
@@ -59,6 +61,18 @@ list(APPEND TEST_FILES tests/game_logic_tests.cpp)
 ci_make_app(
         APP_NAME        flappybird
         CINDER_PATH     ${CINDER_PATH}
-        SOURCES         apps/cinder_app_main.cc ${SOURCE_FILES}
+        SOURCES         apps/cinder_app_main.cpp ${SOURCE_FILES}
         INCLUDES        include
 )
+
+ci_make_app(
+        APP_NAME        flappybird-test
+        CINDER_PATH     ${CINDER_PATH}
+        SOURCES         tests/test_main.cpp ${SOURCE_FILES} ${TEST_FILES}
+        INCLUDES        include
+        LIBRARIES       catch2
+)
+
+if(MSVC)
+    set_property(TARGET flappybird-test APPEND_STRING PROPERTY LINK_FLAGS " /SUBSYSTEM:CONSOLE")
+endif()

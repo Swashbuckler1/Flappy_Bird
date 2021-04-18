@@ -11,6 +11,10 @@ namespace flappybird {
         
         Bird(const glm::vec2& position, const glm::vec2& velocity);
         
+        const glm::vec2& GetPosition() const;
+        
+        const glm::vec2& GetVelocity() const;
+        
     private:
         glm::vec2 position_;
         glm::vec2 velocity_;
