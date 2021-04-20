@@ -54,7 +54,8 @@ include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
         src/bird.cpp
         src/barrel.cpp
-        src/flappybird_app.cpp)
+        src/flappybird_app.cpp
+        src/screen.cpp)
 
 list(APPEND TEST_FILES tests/game_logic_tests.cpp)
 
