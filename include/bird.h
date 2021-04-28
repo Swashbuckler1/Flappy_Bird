@@ -29,7 +29,7 @@ namespace flappybird {
          * Getter for velocity
          * @return vec2& for velocity
          */
-        const glm::vec2 &GetVelocity() const;
+        glm::vec2 &GetVelocity();
 
         /**
          * Adjusts position based on velocity vector
@@ -46,17 +46,17 @@ namespace flappybird {
          */
         void StopMoving();
 
-        /**
-         * Checks if bird in on the ground
-         * @return bool if bird on ground
-         */
-        const bool IsOnGround() const;
+        const ci::Color GetColor() const;
+        
+        const float GetDragAcceleration() const;
 
     private:
         glm::vec2 position_;
         glm::vec2 velocity_;
+        const float gravity_ = 0.3f;
+        const float drag_acceleration_ = 10;
 
-        const float acceleration = 1.5f;
+        ci::Color color_;
     };
 }// namespace flappybird
 #endif//FINAL_PROJECT_BIRD_H

@@ -4,18 +4,18 @@ namespace flappybird {
     Bird::Bird(const glm::vec2 &position, const glm::vec2 &velocity) {
         position_ = position;
         velocity_ = velocity;
+        color_ = ci::Color(1, 0,0);
     }
 
     glm::vec2 &Bird::GetPosition() {
         return position_;
     }
 
-    const glm::vec2 &Bird::GetVelocity() const {
+    glm::vec2 &Bird::GetVelocity() {
         return velocity_;
     }
 
     void Bird::UpdatePosition() {
-        UpdateVelocity();
         position_ += velocity_;
     }
 
@@ -24,11 +24,15 @@ namespace flappybird {
         velocity_.y = 0;
     }
 
-    const bool Bird::IsOnGround() const {
-        return position_.y == 0;
-    }
-
     void Bird::UpdateVelocity() {
-        velocity_.y -= acceleration;
+        velocity_.y += gravity_;
+    }
+    
+    const ci::Color Bird::GetColor() const {
+        return color_;
+    }
+    
+    const float Bird::GetDragAcceleration() const {
+        return drag_acceleration_;
     }
 }// namespace flappybird
