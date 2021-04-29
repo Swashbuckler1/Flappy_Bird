@@ -20,6 +20,7 @@ namespace flappybird {
     }
 
     void Bird::StopMoving() {
+        gravity_ = 0;
         velocity_.x = 0;
         velocity_.y = 0;
     }

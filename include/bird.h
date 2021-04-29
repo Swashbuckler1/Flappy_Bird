@@ -53,7 +53,7 @@ namespace flappybird {
     private:
         glm::vec2 position_;
         glm::vec2 velocity_;
-        const float gravity_ = 0.3f;
+        float gravity_ = 0.3f;
         const float drag_acceleration_ = 10;
 
         ci::Color color_;

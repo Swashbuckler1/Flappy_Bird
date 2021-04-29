@@ -8,11 +8,12 @@ namespace flappybird {
         bottom_right_ = bottom_right;
 
         birds_.push_back(bird_);
-        //barrels_.push_back(Barrel(glm::vec2(535, 535), glm::vec2(565, 1070)));
+        barrels_.push_back(Barrel(vec2(535, 535), vec2(565, 1070)));
+        barrels_.push_back(Barrel(vec2(535, 0), vec2(565, 400)));
     }
 
     void Screen::Display() {
-        AddBarrel();
+        //AddBarrel();
         for (Bird &bird : birds_) {
             ci::gl::color(bird.GetColor());
             ci::gl::drawSolidCircle(bird.GetPosition(),
@@ -26,15 +27,18 @@ namespace flappybird {
     }
 
     void Screen::AdvanceOneFrame() {
-        for (Bird &bird : birds_) {
-            if (IsBirdOnGround()) {
-                bird.StopMoving();
-            } else if (IsBirdAtTop()) {
-                bird.GetPosition().y = top_left_.y;
+        for (Barrel &barrel : barrels_) {
+            for (Bird &bird : birds_) {
+                if (IsBirdOnGround()) {
+                    bird.StopMoving();
+                } else if (IsBirdAtTop()) {
+                    bird.GetPosition().y = top_left_.y;
+                }
+                
+                barrel.HandleBirdCollision(bird);
+                bird.UpdateVelocity();
+                bird.UpdatePosition();
             }
-
-            bird.UpdateVelocity();
-            bird.UpdatePosition();
         }
     }
 
@@ -59,7 +63,7 @@ namespace flappybird {
 
         int bottom_right_y = rand() % (int) bottom_right_.y;
         vec2 bottom_right(top_left.x + kBarrelWidth_, bottom_right_y);
-        
+
         Barrel barrel(top_left, bottom_right);
         barrels_.push_back(barrel);
     }

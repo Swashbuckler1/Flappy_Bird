@@ -2,6 +2,7 @@
 #define FINAL_PROJECT_BARREL_H
 
 #include "cinder/gl/gl.h"
+#include "bird.h"
 
 namespace flappybird {
     /**
@@ -23,6 +24,14 @@ namespace flappybird {
         glm::vec2 GetBottomRight();
         
         const ci::Color GetColor() const;
+        
+        bool HasBirdHit(Bird& bird);
+        
+        bool HasBirdHitHorizontal(Bird& bird);
+        
+        bool BarrelWidthContainsBird(Bird& bird);
+        
+        void HandleBirdCollision(Bird& bird);
 
     private:
         glm::vec2 top_left_;
