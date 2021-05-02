@@ -3,9 +3,10 @@
 namespace flappybird {
 
 
-    Barrel::Barrel(const glm::vec2 &top_left, const glm::vec2 &bottom_right) {
+    Barrel::Barrel(const glm::vec2 &top_left, const glm::vec2 &bottom_right, const glm::vec2 &velocity) {
         top_left_ = top_left;
         bottom_right_ = bottom_right;
+        velocity_ = velocity;
         color_ = ci::Color(0, 1, 0);
     }
 
@@ -29,11 +30,15 @@ namespace flappybird {
     }
     bool Barrel::BarrelWidthContainsBird(Bird &bird) {
         return bird.GetPosition().x > top_left_.x &&
-                bird.GetPosition().x < bottom_right_.x;
+               bird.GetPosition().x < bottom_right_.x;
     }
     void Barrel::HandleBirdCollision(Bird &bird) {
         if (HasBirdHit(bird)) {
             bird.StopMoving();
         }
+    }
+    void Barrel::UpdatePosition() {
+        top_left_.x -= velocity_.x;
+        bottom_right_.x -= velocity_.x;
     }
 }// namespace flappybird
