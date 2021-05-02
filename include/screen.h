@@ -50,7 +50,7 @@ namespace flappybird {
         const float radius_ = 40;
 
         glm::vec2 initial_position = glm::vec2(20, 535);
-        glm::vec2 initial_velocity = glm::vec2(1.5, 0);
+        glm::vec2 initial_velocity = glm::vec2(0, 0);
         Bird bird_ = Bird(initial_position, initial_velocity);
         std::vector<Barrel> barrels_;
         std::vector<Bird> birds_;
