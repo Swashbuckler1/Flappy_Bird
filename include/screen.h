@@ -55,7 +55,7 @@ namespace flappybird {
         std::vector<Barrel> barrels_;
         std::vector<Bird> birds_;
         const size_t kBarrelWidth_ = 29;
-        const glm::vec2 kBarrelVelocity_ = glm::vec2(-0.5, 0);
+        const glm::vec2 kBarrelVelocity_ = glm::vec2(0.5, 0);
         
         size_t frame_rate_;
     };
