@@ -8,8 +8,8 @@ namespace flappybird {
         bottom_right_ = bottom_right;
 
         birds_.push_back(bird_);
-        barrels_.push_back(Barrel(vec2(535, 535), vec2(565, 1070)));
-        barrels_.push_back(Barrel(vec2(535, 0), vec2(565, 400)));
+        barrels_.push_back(Barrel(vec2(535, 535), vec2(565, 1070), kBarrelVelocity_));
+        barrels_.push_back(Barrel(vec2(535, 0), vec2(565, 400), kBarrelVelocity_));
     }
 
     void Screen::Display() {
@@ -64,7 +64,7 @@ namespace flappybird {
         int bottom_right_y = rand() % (int) bottom_right_.y;
         vec2 bottom_right(top_left.x + kBarrelWidth_, bottom_right_y);
 
-        Barrel barrel(top_left, bottom_right);
+        Barrel barrel(top_left, bottom_right, kBarrelVelocity_);
         barrels_.push_back(barrel);
     }
 }// namespace flappybird
