@@ -39,7 +39,6 @@ namespace flappybird {
         glm::vec2 top_left_;
         glm::vec2 bottom_right_;
         glm::vec2 velocity_;
-
         ci::Color color_;
     };
 }// namespace flappybird
