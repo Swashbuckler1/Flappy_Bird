@@ -45,6 +45,8 @@ namespace flappybird {
          * Sets velocity to 0
          */
         void StopMoving();
+        
+        void SetPositionAtTop();
 
         const ci::Color GetColor() const;
         
@@ -53,8 +55,8 @@ namespace flappybird {
     private:
         glm::vec2 position_;
         glm::vec2 velocity_;
-        float gravity_ = 0.3f;
-        const float drag_acceleration_ = 10;
+        float gravity_ = 0.19f;
+        float drag_acceleration_ = 10;
 
         ci::Color color_;
     };
