@@ -67,7 +67,14 @@ namespace flappybird {
     }
     void Screen::ResetGameState() {
         keep_adding_barrels_ = false;
+        for (Barrel& barrel : barrels_) {
+            barrel.StopMoving();
+        }
         bird_.ResetBird(initial_position, initial_velocity);
+
+        for (Barrel& barrel : barrels_) {
+            barrel.SetVelocity(kBarrelVelocity_);
+        }
         keep_adding_barrels_ = true;
     }
 }// namespace flappybird
