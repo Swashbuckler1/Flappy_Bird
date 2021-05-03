@@ -20,6 +20,7 @@ namespace flappybird {
     }
 
     void Bird::StopMoving() {
+        drag_acceleration_ = 0;
         gravity_ = 0;
         velocity_.x = 0;
         velocity_.y = 0;
@@ -35,5 +36,8 @@ namespace flappybird {
     
     const float Bird::GetDragAcceleration() const {
         return drag_acceleration_;
+    }
+    void Bird::SetPositionAtTop() {
+        position_.y = 0;
     }
 }// namespace flappybird
