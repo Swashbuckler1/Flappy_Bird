@@ -42,4 +42,11 @@ namespace flappybird {
         top_left_.x -= velocity_.x;
         bottom_right_.x -= velocity_.x;
     }
+    void Barrel::StopMoving() {
+        velocity_.x = 0;
+        velocity_.y = 0;
+    }
+    void Barrel::SetVelocity(const glm::vec2 &velocity) {
+        velocity_ = velocity;
+    }
 }// namespace flappybird
