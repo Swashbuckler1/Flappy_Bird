@@ -41,6 +41,8 @@ namespace flappybird {
         
         void AddBarrel();
         
+        void ResetGameState();
+        
     private:
         glm::vec2 top_left_;
         glm::vec2 bottom_right_;
@@ -57,6 +59,7 @@ namespace flappybird {
         const int kMinimumSpaceBetweenBarrels = 200;
         int random_height_;
         const glm::vec2 kBarrelVelocity_ = glm::vec2(1.5, 0);
+        bool keep_adding_barrels_;
         
         size_t frame_rate_;
         const size_t frame_partition_ = 200;
