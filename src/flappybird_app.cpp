@@ -27,5 +27,14 @@ namespace flappybird {
             case ci::app::KeyEvent::KEY_ESCAPE:
                 screen_.ResetGameState();
         }
+
+        switch (event.getChar()) {
+            case pause_:
+                screen_.Pause();
+                break;
+            case resume_:
+                screen_.Resume();
+                break;
+        }
     }
 }// namespace flappybird

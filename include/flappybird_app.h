@@ -32,6 +32,9 @@ namespace flappybird {
     private:
         const size_t kWindowSize = 1070;
         Screen screen_;
+        
+        static constexpr char pause_ = 'p';
+        static constexpr char resume_ = 'r';
     };
 }// namespace flappybird
 #endif//FINAL_PROJECT_FLAPPYBIRD_APP_H
