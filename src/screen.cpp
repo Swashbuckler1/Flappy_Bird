@@ -6,19 +6,13 @@ namespace flappybird {
     Screen::Screen(const glm::vec2 &top_left, const glm::vec2 &bottom_right) {
         top_left_ = top_left;
         bottom_right_ = bottom_right;
-
-        birds_.push_back(bird_);
-        barrels_.push_back(Barrel(vec2(535, 535), vec2(565, 1070), kBarrelVelocity_));
-        barrels_.push_back(Barrel(vec2(535, 0), vec2(565, 400), kBarrelVelocity_));
+        kScreenSize_ = (int) (bottom_right_.y - top_left_.y);
     }
 
     void Screen::Display() {
-        //AddBarrel();
-        for (Bird &bird : birds_) {
-            ci::gl::color(bird.GetColor());
-            ci::gl::drawSolidCircle(bird.GetPosition(),
-                                    radius_);
-        }
+        ci::gl::color(bird_.GetColor());
+        ci::gl::drawSolidCircle(bird_.GetPosition(),
+                                radius_);
 
         for (Barrel &barrel : barrels_) {
             ci::gl::color(barrel.GetColor());
@@ -27,27 +21,27 @@ namespace flappybird {
     }
 
     void Screen::AdvanceOneFrame() {
-        for (Barrel &barrel : barrels_) {
-            for (Bird &bird : birds_) {
-                if (IsBirdOnGround()) {
-                    bird.StopMoving();
-                } else if (IsBirdAtTop()) {
-                    bird.GetPosition().y = top_left_.y;
-                }
-                
-                barrel.HandleBirdCollision(bird);
-                bird.UpdateVelocity();
-                bird.UpdatePosition();
-            }
+        if (frame_rate_ % frame_partition_ == 0) {
+            AddBarrel();
+        }
+        frame_rate_++;
+        
+        if (IsBirdOnGround()) {
+            bird_.StopMoving();
+        } else if (IsBirdAtTop()) {
+            bird_.SetPositionAtTop();
+        }
+        bird_.UpdateVelocity();
+        bird_.UpdatePosition();
+        
+        for (Barrel& barrel : barrels_) {
+            barrel.HandleBirdCollision(bird_);
+            barrel.UpdatePosition();
         }
     }
 
     Bird &Screen::GetBird() {
         return bird_;
-    }
-
-    std::vector<Bird> &Screen::GetBirds() {
-        return birds_;
     }
 
     bool Screen::IsBirdOnGround() {
@@ -57,14 +51,15 @@ namespace flappybird {
     bool Screen::IsBirdAtTop() {
         return bird_.GetPosition().y == top_left_.y;
     }
+
     void Screen::AddBarrel() {
-        int top_left_x = rand() % (int) top_left_.x;
-        vec2 top_left((float) top_left_x, 0);
-
-        int bottom_right_y = rand() % (int) bottom_right_.y;
-        vec2 bottom_right(top_left.x + kBarrelWidth_, bottom_right_y);
-
-        Barrel barrel(top_left, bottom_right, kBarrelVelocity_);
-        barrels_.push_back(barrel);
+        random_height_ = rand() % (kScreenSize_ - kMinimumBarrelLength - kMinimumSpaceBetweenBarrels) +
+                     kMinimumBarrelLength;
+        Barrel top_barrel(vec2(kScreenSize_ - kBarrelWidth_, 0), vec2(kScreenSize_, random_height_),
+                      kBarrelVelocity_);
+        Barrel bottom_barrel(vec2(kScreenSize_ - kBarrelWidth_, random_height_ + kMinimumSpaceBetweenBarrels),
+                             vec2(kScreenSize_, kScreenSize_), kBarrelVelocity_);
+        barrels_.push_back(top_barrel);
+        barrels_.push_back(bottom_barrel);
     }
 }// namespace flappybird
