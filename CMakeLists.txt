@@ -55,7 +55,8 @@ list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
         src/bird.cpp
         src/barrel.cpp
         src/flappybird_app.cpp
-        src/screen.cpp)
+        src/screen.cpp
+        src/plane.cpp)
 
 list(APPEND TEST_FILES tests/game_logic_tests.cpp)
 
