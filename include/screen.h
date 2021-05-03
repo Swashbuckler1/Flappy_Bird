@@ -5,7 +5,6 @@
 #include "bird.h"
 #include "cinder/gl/gl.h"
 #include <vector>
-#include "glm/gtc/random.hpp"
 
 namespace flappybird {
     /**
@@ -36,8 +35,6 @@ namespace flappybird {
          */
         Bird &GetBird();
         
-        std::vector<Bird>& GetBirds();
-
         bool IsBirdOnGround();
         
         bool IsBirdAtTop();
@@ -48,16 +45,21 @@ namespace flappybird {
         glm::vec2 top_left_;
         glm::vec2 bottom_right_;
         const float radius_ = 40;
+        int kScreenSize_;
 
-        glm::vec2 initial_position = glm::vec2(20, 535);
+        glm::vec2 initial_position = glm::vec2(50, 535);
         glm::vec2 initial_velocity = glm::vec2(0, 0);
         Bird bird_ = Bird(initial_position, initial_velocity);
         std::vector<Barrel> barrels_;
-        std::vector<Bird> birds_;
-        const size_t kBarrelWidth_ = 29;
-        const glm::vec2 kBarrelVelocity_ = glm::vec2(0.5, 0);
+        
+        const int kBarrelWidth_ = 30;
+        const int kMinimumBarrelLength = 40;
+        const int kMinimumSpaceBetweenBarrels = 200;
+        int random_height_;
+        const glm::vec2 kBarrelVelocity_ = glm::vec2(1.5, 0);
         
         size_t frame_rate_;
+        const size_t frame_partition_ = 200;
     };
 }// namespace flappybird
 #endif//FINAL_PROJECT_SCREEN_H
