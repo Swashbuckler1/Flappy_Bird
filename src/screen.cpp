@@ -7,6 +7,7 @@ namespace flappybird {
         top_left_ = top_left;
         bottom_right_ = bottom_right;
         kScreenSize_ = (int) (bottom_right_.y - top_left_.y);
+        keep_adding_barrels_ = true;
     }
 
     void Screen::Display() {
@@ -21,8 +22,10 @@ namespace flappybird {
     }
 
     void Screen::AdvanceOneFrame() {
-        if (frame_rate_ % frame_partition_ == 0) {
-            AddBarrel();
+        if (keep_adding_barrels_) {
+            if (frame_rate_ % frame_partition_ == 0) {
+                AddBarrel();
+            }
         }
         frame_rate_++;
         
@@ -61,5 +64,10 @@ namespace flappybird {
                              vec2(kScreenSize_, kScreenSize_), kBarrelVelocity_);
         barrels_.push_back(top_barrel);
         barrels_.push_back(bottom_barrel);
+    }
+    void Screen::ResetGameState() {
+        keep_adding_barrels_ = false;
+        bird_.ResetBird(initial_position, initial_velocity);
+        keep_adding_barrels_ = true;
     }
 }// namespace flappybird
