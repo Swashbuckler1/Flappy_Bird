@@ -5,6 +5,8 @@ namespace flappybird {
         position_ = position;
         velocity_ = velocity;
         color_ = ci::Color(1, 0,0);
+        gravity_ = initial_gravity_;
+        drag_acceleration_ = initial_drag_acceleration;
     }
 
     glm::vec2 &Bird::GetPosition() {
@@ -39,5 +41,17 @@ namespace flappybird {
     }
     void Bird::SetPositionAtTop() {
         position_.y = 0;
+    }
+    void Bird::SetPosition(const glm::vec2 &position) {
+        position_ = position;
+    }
+    void Bird::SetVelocity(const glm::vec2 &velocity) {
+        velocity_ = velocity;
+    }
+    void Bird::ResetBird(const glm::vec2 &position, const glm::vec2 &velocity) {
+        SetVelocity(velocity);
+        SetPosition(position);
+        gravity_ = initial_gravity_;
+        drag_acceleration_ = initial_drag_acceleration;
     }
 }// namespace flappybird
