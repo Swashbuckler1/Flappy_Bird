@@ -57,6 +57,8 @@ namespace flappybird {
         const float GetDragAcceleration() const;
         
         void ResetBird(const glm::vec2 &position, const glm::vec2 &velocity);
+        
+        void ResetAccelerations();
 
     private:
         glm::vec2 position_;
