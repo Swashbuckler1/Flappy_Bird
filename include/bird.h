@@ -46,17 +46,25 @@ namespace flappybird {
          */
         void StopMoving();
         
+        void SetPosition(const glm::vec2 &position);
+
+        void SetVelocity(const glm::vec2 &velocity);
+        
         void SetPositionAtTop();
 
         const ci::Color GetColor() const;
         
         const float GetDragAcceleration() const;
+        
+        void ResetBird(const glm::vec2 &position, const glm::vec2 &velocity);
 
     private:
         glm::vec2 position_;
         glm::vec2 velocity_;
-        float gravity_ = 0.19f;
-        float drag_acceleration_ = 10;
+        const float initial_gravity_ = 0.19f;
+        float gravity_;
+        const float initial_drag_acceleration = 10;
+        float drag_acceleration_;
 
         ci::Color color_;
     };
