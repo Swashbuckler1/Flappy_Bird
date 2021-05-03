@@ -70,11 +70,9 @@ namespace flappybird {
         for (Barrel& barrel : barrels_) {
             barrel.StopMoving();
         }
+        barrels_.clear();
+        
         bird_.ResetBird(initial_position, initial_velocity);
-
-        for (Barrel& barrel : barrels_) {
-            barrel.SetVelocity(kBarrelVelocity_);
-        }
         keep_adding_barrels_ = true;
     }
 }// namespace flappybird
