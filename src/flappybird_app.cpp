@@ -20,9 +20,12 @@ namespace flappybird {
     }
 
     void FlappyBirdApp::keyDown(ci::app::KeyEvent event) {
-        Bird& bird_ref = screen_.GetBird();
-        if (event.getCode() == ci::app::KeyEvent::KEY_SPACE) {
-            bird_ref.GetVelocity().y -= bird_ref.GetDragAcceleration();
+        switch (event.getCode()) {
+            case ci::app::KeyEvent::KEY_SPACE:
+                screen_.GetBird().GetVelocity().y -= screen_.GetBird().GetDragAcceleration();
+                break;
+            case ci::app::KeyEvent::KEY_ESCAPE:
+                screen_.ResetGameState();
         }
     }
 }// namespace flappybird
