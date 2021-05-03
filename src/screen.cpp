@@ -38,6 +38,12 @@ namespace flappybird {
         bird_.UpdatePosition();
         
         for (Barrel& barrel : barrels_) {
+            if (barrel.HasBirdHit(bird_)) {
+                keep_adding_barrels_ = false;
+                for (Barrel& barrel : barrels_) {
+                    barrel.StopMoving();
+                }
+            }
             barrel.HandleBirdCollision(bird_);
             barrel.UpdatePosition();
         }
