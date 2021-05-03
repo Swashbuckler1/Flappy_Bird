@@ -36,6 +36,8 @@ namespace flappybird {
         void UpdatePosition();
         
         void StopMoving();
+        
+        void SetVelocity(const glm::vec2 &velocity);
 
     private:
         glm::vec2 top_left_;
