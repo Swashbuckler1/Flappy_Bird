@@ -56,7 +56,7 @@ namespace flappybird {
     }
 
     void Screen::AddBarrel() {
-        random_height_ = rand() % (kScreenSize_ - kMinimumBarrelLength - kMinimumSpaceBetweenBarrels) +
+        int random_height_ = rand() % (kScreenSize_ - kMinimumBarrelLength - kMinimumSpaceBetweenBarrels) +
                      kMinimumBarrelLength;
         Barrel top_barrel(vec2(kScreenSize_ - kBarrelWidth_, 0), vec2(kScreenSize_, random_height_),
                       kBarrelVelocity_);
@@ -73,6 +73,22 @@ namespace flappybird {
         barrels_.clear();
         
         bird_.ResetBird(initial_position, initial_velocity);
+        keep_adding_barrels_ = true;
+    }
+    void Screen::Pause() {
+        keep_adding_barrels_ = false;
+
+        for (Barrel& barrel : barrels_) {
+            barrel.StopMoving();
+        }
+        bird_.StopMoving();
+    }
+    void Screen::Resume() {
+        bird_.ResetAccelerations();
+        for (Barrel& barrel : barrels_) {
+            barrel.SetVelocity(kBarrelVelocity_);
+        }
+        
         keep_adding_barrels_ = true;
     }
 }// namespace flappybird
