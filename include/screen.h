@@ -51,24 +51,26 @@ namespace flappybird {
     private:
         glm::vec2 top_left_;
         glm::vec2 bottom_right_;
-        const float radius_ = 40;
-        int kScreenSize_;
+        const float kRadius_ = 40;
+        int screen_size_;
 
-        const glm::vec2 initial_position = glm::vec2(50, (bottom_right_.y - top_left_.y) / 2);
-        const glm::vec2 initial_velocity = glm::vec2(0, 0);
-        Bird bird_ = Bird(initial_position, initial_velocity);
+        const glm::vec2 kInitialPosition_ = glm::vec2(50, (bottom_right_.y - top_left_.y) / 2);
+        const glm::vec2 kInitialVelocity_ = glm::vec2(0, 0);
+        Bird bird_ = Bird(kInitialPosition_, kInitialVelocity_);
         std::vector<Barrel> barrels_;
         
         const int kBarrelWidth_ = 30;
-        const int kMinimumBarrelLength = 40;
-        const int kMinimumSpaceBetweenBarrels = 200;
+        const int kMinimumBarrelLength_ = 40;
+        const int kMinimumSpaceBetweenBarrels_ = 200;
         const glm::vec2 kBarrelVelocity_ = glm::vec2(1.5, 0);
         bool keep_adding_barrels_;
         
         size_t frame_rate_;
-        const size_t frame_partition_ = 200;
+        const size_t kFramePartition_ = 200;
         
         size_t score_;
+        const glm::vec2 kScorePoint_ = glm::vec2(10, 20);
+        const float kFontSize_ = 50;
     };
 }// namespace flappybird
 #endif//FINAL_PROJECT_SCREEN_H
