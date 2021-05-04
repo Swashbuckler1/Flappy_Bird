@@ -36,6 +36,8 @@ namespace flappybird {
          */
         Bird &GetBird();
         
+        std::vector<Barrel>& GetBarrels();
+        
         bool IsBirdOnGround();
         
         bool IsBirdAtTop();
@@ -57,8 +59,8 @@ namespace flappybird {
         const glm::vec2 kInitialPosition_ = glm::vec2(50, (bottom_right_.y - top_left_.y) / 2);
         const glm::vec2 kInitialVelocity_ = glm::vec2(0, 0);
         Bird bird_ = Bird(kInitialPosition_, kInitialVelocity_);
-        std::vector<Barrel> barrels_;
         
+        std::vector<Barrel> barrels_;
         const int kBarrelWidth_ = 30;
         const int kMinimumBarrelLength_ = 40;
         const int kMinimumSpaceBetweenBarrels_ = 200;

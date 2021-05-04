@@ -100,4 +100,7 @@ namespace flappybird {
 
         keep_adding_barrels_ = true;
     }
+    std::vector<Barrel> &Screen::GetBarrels() {
+        return barrels_;
+    }
 }// namespace flappybird
