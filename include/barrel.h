@@ -22,6 +22,8 @@ namespace flappybird {
         glm::vec2 GetTopLeft();
 
         glm::vec2 GetBottomRight();
+        
+        glm::vec2 GetVelocity();
 
         const ci::Color GetColor() const;
 

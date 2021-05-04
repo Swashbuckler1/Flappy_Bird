@@ -18,6 +18,10 @@ namespace flappybird {
         return bottom_right_;
     }
 
+    glm::vec2 Barrel::GetVelocity() {
+        return velocity_;
+    }
+
     const ci::Color Barrel::GetColor() const {
         return color_;
     }
