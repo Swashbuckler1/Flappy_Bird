@@ -30,6 +30,8 @@ namespace flappybird {
          * @return vec2& for velocity
          */
         glm::vec2 &GetVelocity();
+        
+        const float GetRadius() const;
 
         /**
          * Adjusts position based on velocity vector
@@ -90,6 +92,7 @@ namespace flappybird {
     private:
         glm::vec2 position_;
         glm::vec2 velocity_;
+        const float kRadius_ = 40;
         const float initial_gravity_ = 0.19f;
         float gravity_;
         const float initial_drag_acceleration = 10;

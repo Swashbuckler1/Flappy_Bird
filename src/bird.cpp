@@ -16,6 +16,10 @@ namespace flappybird {
         return velocity_;
     }
 
+    const float Bird::GetRadius() const {
+        return kRadius_;
+    }
+
     void Bird::UpdatePosition() {
         position_ += velocity_;
     }
