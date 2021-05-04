@@ -57,15 +57,7 @@ namespace flappybird {
 
         for (Barrel &barrel : barrels_) {
             if (barrel.HasBirdHit(bird_)) {
-                keep_adding_barrels_ = false;
-                keep_adding_planes_ = false;
-                for (Barrel &barrel : barrels_) {
-                    barrel.StopMoving();
-                }
-
-                for (Plane &plane : planes_) {
-                    plane.StopMoving();
-                }
+                Pause();
             }
             barrel.HandleBirdCollision(bird_);
             barrel.UpdatePosition();
@@ -73,15 +65,7 @@ namespace flappybird {
         
         for (Plane &plane : planes_) {
             if (plane.HasBirdHit(bird_)) {
-                keep_adding_planes_ = false;
-                keep_adding_barrels_ = false;
-                for (Plane &plane : planes_) {
-                    plane.StopMoving();
-                }
-
-                for (Barrel &barrel : barrels_) {
-                    barrel.StopMoving();
-                }
+                Pause();
             }
             plane.HandleBirdCollision(bird_);
             plane.UpdatePosition();
