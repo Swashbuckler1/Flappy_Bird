@@ -3,6 +3,7 @@
 
 #include "barrel.h"
 #include "bird.h"
+#include "plane.h"
 #include "cinder/Font.h"
 #include "cinder/gl/gl.h"
 #include <vector>
@@ -58,6 +59,11 @@ namespace flappybird {
          * Adds barrel pairs (top/bottom) of random heights from the right
          */
         void AddBarrel();
+        
+        /**
+         * Adds plane from the right
+         */
+        void AddPlane();
 
         /**
          * 
@@ -75,22 +81,31 @@ namespace flappybird {
         void Resume();
 
     private:
+        // Screen
         glm::vec2 top_left_;
         glm::vec2 bottom_right_;
-        const float kRadius_ = 40;
         int screen_size_;
 
+        // Bird
         const glm::vec2 kInitialPosition_ = glm::vec2(50, (bottom_right_.y - top_left_.y) / 2);
         const glm::vec2 kInitialVelocity_ = glm::vec2(0, 0);
         Bird bird_ = Bird(kInitialPosition_, kInitialVelocity_);
 
+        // Barrels
         std::vector<Barrel> barrels_;
         const int kBarrelWidth_ = 30;
         const int kMinimumBarrelLength_ = 40;
         const int kMinimumSpaceBetweenBarrels_ = 200;
         const glm::vec2 kBarrelVelocity_ = glm::vec2(1.5, 0);
         bool keep_adding_barrels_;
+        
+        // Planes
+        std::vector<Plane> planes_;
+        bool keep_adding_planes_;
+        const int kPlaneEdgeLength_ = 80;
+        const glm::vec2 kPlaneVelocity_ = glm::vec2(2.2, 0);
 
+        // Score
         size_t frame_rate_;
         const size_t kFramePartition_ = 200;
 
