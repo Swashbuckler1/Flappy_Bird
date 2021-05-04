@@ -25,6 +25,9 @@ namespace flappybird {
 
         /**
          * When space bar is pressed, moves bird up by 20 pixels
+         * When 'escape' is pressed, resets game
+         * When 'p' is pressed, pauses
+         * When 'r' is pressed, resumes
          * @param event KeyEvent representing space bar
          */
         void keyDown(ci::app::KeyEvent event) override;

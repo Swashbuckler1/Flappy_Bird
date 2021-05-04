@@ -45,19 +45,46 @@ namespace flappybird {
          * Sets velocity to 0
          */
         void StopMoving();
-        
+
+        /**
+         * Setter for position
+         * @param position vec2 for position
+         */
         void SetPosition(const glm::vec2 &position);
 
+        /**
+         * Setter for velocity
+         * @param velocity vec2 for velocity
+         */
         void SetVelocity(const glm::vec2 &velocity);
         
+        /**
+         * Sets the y-coordinate of the bird at the top
+         */
         void SetPositionAtTop();
 
+        /**
+         * Getter for color
+         * @return color_ member variable
+         */
         const ci::Color GetColor() const;
         
+        /**
+         * Getter for drag acceleration
+         * @return float representing drag acceleration
+         */
         const float GetDragAcceleration() const;
         
+        /**
+         * Resets kinematic variables
+         * @param position vec2 for position
+         * @param velocity vec2 for velocity
+         */
         void ResetBird(const glm::vec2 &position, const glm::vec2 &velocity);
         
+        /**
+         * Sets gravity and drag acceleration to initial states
+         */
         void ResetAccelerations();
 
     private:
