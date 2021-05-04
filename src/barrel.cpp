@@ -26,12 +26,10 @@ namespace flappybird {
         return color_;
     }
     bool Barrel::HasBirdHit(Bird &bird) {
-        return HasBirdHitHorizontal(bird) && BarrelWidthContainsBird(bird);
+        return HasBirdHitVertical(bird) && BarrelWidthContainsBird(bird);
     }
-    bool Barrel::HasBirdHitHorizontal(Bird &bird) {
-        return (bird.GetPosition().y < top_left_.y &&
-               bird.GetPosition().y > bottom_right_.y)
-                || (bird.GetPosition().y > top_left_.y && bird.GetPosition().y < bottom_right_.y);
+    bool Barrel::HasBirdHitVertical(Bird &bird) {
+        return bird.GetPosition().y > top_left_.y && bird.GetPosition().y < bottom_right_.y;
     }
     bool Barrel::BarrelWidthContainsBird(Bird &bird) {
         return bird.GetPosition().x > top_left_.x &&
