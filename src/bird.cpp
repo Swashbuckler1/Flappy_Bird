@@ -48,9 +48,9 @@ namespace flappybird {
         velocity_ = velocity;
     }
     void Bird::ResetBird(const glm::vec2 &position, const glm::vec2 &velocity) {
+        ResetAccelerations();
         SetVelocity(velocity);
         SetPosition(position);
-        ResetAccelerations();
     }
     void Bird::ResetAccelerations() {
         gravity_ = initial_gravity_;
