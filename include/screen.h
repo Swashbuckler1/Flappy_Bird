@@ -4,6 +4,7 @@
 #include "barrel.h"
 #include "bird.h"
 #include "cinder/gl/gl.h"
+#include "cinder/Font.h"
 #include <vector>
 
 namespace flappybird {
@@ -66,6 +67,8 @@ namespace flappybird {
         
         size_t frame_rate_;
         const size_t frame_partition_ = 200;
+        
+        size_t score_;
     };
 }// namespace flappybird
 #endif//FINAL_PROJECT_SCREEN_H

@@ -8,6 +8,7 @@ namespace flappybird {
         bottom_right_ = bottom_right;
         kScreenSize_ = (int) (bottom_right_.y - top_left_.y);
         keep_adding_barrels_ = true;
+        score_ = 0;
     }
 
     void Screen::Display() {
@@ -19,16 +20,21 @@ namespace flappybird {
             ci::gl::color(barrel.GetColor());
             ci::gl::drawSolidRect(ci::Rectf(barrel.GetTopLeft(), barrel.GetBottomRight()));
         }
+
+        ci::gl::drawString(std::to_string(score_), vec2(10, 20),
+                           ci::Color(255, 255, 255),
+                           ci::Font(std::to_string(score_), 50.0f));
     }
 
     void Screen::AdvanceOneFrame() {
         if (keep_adding_barrels_) {
             if (frame_rate_ % frame_partition_ == 0) {
                 AddBarrel();
+                score_++;
             }
         }
         frame_rate_++;
-        
+
         if (IsBirdOnGround()) {
             bird_.StopMoving();
         } else if (IsBirdAtTop()) {
@@ -36,11 +42,11 @@ namespace flappybird {
         }
         bird_.UpdateVelocity();
         bird_.UpdatePosition();
-        
-        for (Barrel& barrel : barrels_) {
+
+        for (Barrel &barrel : barrels_) {
             if (barrel.HasBirdHit(bird_)) {
                 keep_adding_barrels_ = false;
-                for (Barrel& barrel : barrels_) {
+                for (Barrel &barrel : barrels_) {
                     barrel.StopMoving();
                 }
             }
@@ -63,9 +69,9 @@ namespace flappybird {
 
     void Screen::AddBarrel() {
         int random_height_ = rand() % (kScreenSize_ - kMinimumBarrelLength - kMinimumSpaceBetweenBarrels) +
-                     kMinimumBarrelLength;
+                             kMinimumBarrelLength;
         Barrel top_barrel(vec2(kScreenSize_ - kBarrelWidth_, 0), vec2(kScreenSize_, random_height_),
-                      kBarrelVelocity_);
+                          kBarrelVelocity_);
         Barrel bottom_barrel(vec2(kScreenSize_ - kBarrelWidth_, random_height_ + kMinimumSpaceBetweenBarrels),
                              vec2(kScreenSize_, kScreenSize_), kBarrelVelocity_);
         barrels_.push_back(top_barrel);
@@ -73,24 +79,25 @@ namespace flappybird {
     }
     void Screen::ResetGameState() {
         barrels_.clear();
-        
+        score_ = 0;
+
         bird_.ResetBird(initial_position, initial_velocity);
         keep_adding_barrels_ = true;
     }
     void Screen::Pause() {
         keep_adding_barrels_ = false;
 
-        for (Barrel& barrel : barrels_) {
+        for (Barrel &barrel : barrels_) {
             barrel.StopMoving();
         }
         bird_.StopMoving();
     }
     void Screen::Resume() {
         bird_.ResetAccelerations();
-        for (Barrel& barrel : barrels_) {
+        for (Barrel &barrel : barrels_) {
             barrel.SetVelocity(kBarrelVelocity_);
         }
-        
+
         keep_adding_barrels_ = true;
     }
 }// namespace flappybird
